@@ -8,15 +8,21 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/httpclient")
+@RequestMapping("/webclient")
 @RequiredArgsConstructor
 public class HttpClientController {
 
     private final HttpClientService httpClientService;
 
-    @RequestMapping("/test")
+    @RequestMapping
     public ResponseEntity<?> testWebClient() {
-        String reqHttps = httpClientService.reqHttps();
-        return new ResponseEntity<>(reqHttps, HttpStatus.OK);
+        String response = httpClientService.webClient();
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
+
+    @RequestMapping("/ssl")
+    public ResponseEntity<?> testSslWebClient() {
+        String response = httpClientService.sslWebClient();
+        return new ResponseEntity<>(response, HttpStatus.OK);
     }
 }
